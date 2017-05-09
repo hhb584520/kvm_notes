@@ -278,7 +278,9 @@ static inline int kvm_vcpu_exiting_guest_mode(struct kvm_vcpu *vcpu)
 #define KVM_MEM_MAX_NR_PAGES ((1UL << 31) - 1)
 
 struct kvm_memory_slot {
+	// 该块物理内存块所在guest 物理页帧号
 	gfn_t base_gfn;
+	// 该块物理内存块占用的page数
 	unsigned long npages;
 	unsigned long *dirty_bitmap;
 	struct kvm_arch_memory_slot arch;
@@ -934,6 +936,7 @@ __gfn_to_memslot(struct kvm_memslots *slots, gfn_t gfn)
 	return search_memslots(slots, gfn);
 }
 
+// hva=base_hva+(gfn-base_gfn)*PAGE_SIZE
 static inline unsigned long
 __gfn_to_hva_memslot(struct kvm_memory_slot *slot, gfn_t gfn)
 {

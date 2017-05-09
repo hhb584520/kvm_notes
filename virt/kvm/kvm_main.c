@@ -1305,6 +1305,8 @@ unsigned long gfn_to_hva_memslot(struct kvm_memory_slot *slot,
 }
 EXPORT_SYMBOL_GPL(gfn_to_hva_memslot);
 
+// hva=base_hva+(gfn-base_gfn)*PAGE_SIZE
+// Guest 物理页框到HVA转换
 unsigned long gfn_to_hva(struct kvm *kvm, gfn_t gfn)
 {
 	return gfn_to_hva_many(gfn_to_memslot(kvm, gfn), gfn, NULL);
