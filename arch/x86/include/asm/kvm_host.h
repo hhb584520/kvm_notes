@@ -684,6 +684,7 @@ struct kvm_lpage_info {
 };
 
 struct kvm_arch_memory_slot {
+	// 分配该块物理内存对应的host内核虚拟地址（vmalloc分配）
 	struct kvm_rmap_head *rmap[KVM_NR_PAGE_SIZES];
 	struct kvm_lpage_info *lpage_info[KVM_NR_PAGE_SIZES - 1];
 	unsigned short *gfn_track[KVM_PAGE_TRACK_MAX];

@@ -283,7 +283,9 @@ struct kvm_memory_slot {
 	// 该块物理内存块占用的page数
 	unsigned long npages;
 	unsigned long *dirty_bitmap;
+	// 分配该块物理内存对应的host内核虚拟地址（vmalloc分配）
 	struct kvm_arch_memory_slot arch;
+	// 用户空间地址（QEMU)
 	unsigned long userspace_addr;
 	u32 flags;
 	short id;
