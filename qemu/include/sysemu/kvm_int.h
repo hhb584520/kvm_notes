@@ -15,9 +15,13 @@
 
 typedef struct KVMSlot
 {
+	// Guest物理地址块的起始地址
     hwaddr start_addr;
+	// 大小
     ram_addr_t memory_size;
-    void *ram;
+    // QUMU用户空间地址
+	void *ram;
+	// slot id
     int slot;
     int flags;
 } KVMSlot;

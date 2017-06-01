@@ -5633,6 +5633,8 @@ static int handle_machine_check(struct kvm_vcpu *vcpu)
 	return 1;
 }
 
+// 影子页表的载入到 CR3 中真正为物理 MMU 所利用进行寻址的页表，因此开始时任何的
+// 内存访问操作都会引起缺页异常会导致 vm 发生 VM exit; 进入 handle_exception
 static int handle_exception(struct kvm_vcpu *vcpu)
 {
 	struct vcpu_vmx *vmx = to_vmx(vcpu);
@@ -8516,6 +8518,7 @@ static int vmx_handle_exit(struct kvm_vcpu *vcpu)
 
 	if (exit_reason < kvm_vmx_max_exit_handlers
 	    && kvm_vmx_exit_handlers[exit_reason])
+		// [EXIT_REASON_EPT_VIOLATION] = handle_ept_violation;
 		return kvm_vmx_exit_handlers[exit_reason](vcpu);
 	else {
 		vcpu_unimpl(vcpu, "vmx: unexpected exit reason 0x%x\n",

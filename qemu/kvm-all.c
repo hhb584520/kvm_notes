@@ -692,6 +692,10 @@ kvm_check_extension_list(KVMState *s, const KVMCapabilityInfo *list)
     return NULL;
 }
 
+// QEMU 物理内存的注册
+// kvm_set_phys_mem->kvm_set_user_memory_region->kvm_vm_ioctl 进入kernel
+// KVM_SET_USER_MEMORY_REGION->kvm_vm_ioctl_set_memory_region->
+// __kvm_set_memory_region
 static void kvm_set_phys_mem(KVMMemoryListener *kml,
                              MemoryRegionSection *section, bool add)
 {
